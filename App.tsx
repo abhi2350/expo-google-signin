@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from "expo-web-browser";
+import { constants, strings } from "./constants";
 
 interface UserInfo {
   name: string;
@@ -15,9 +16,9 @@ export default function App() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
 const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-  iosClientId: "74629819012-rkiav4q4uv36kerqr43bljf39sk6l96g.apps.googleusercontent.com",
-  clientId: "74629819012-g2h1hmo2gdulnschu2e36ot4ha95b5lh.apps.googleusercontent.com",
-  androidClientId: "74629819012-7pirurm080u9mb9r9mfak69l0cjvge7m.apps.googleusercontent.com",
+  iosClientId: constants.ios_client_id,
+  clientId: constants.client_id,
+  androidClientId: constants.android_client_id,
 });
 
   useEffect(() => {
@@ -29,7 +30,6 @@ const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
         }
       );
       const user = await userInfoResponse.json();
-      console.log("break 2", user);
       setUserInfo(user);
     };
 
@@ -39,22 +39,22 @@ const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     }
   }, [response]);
 
+  const doSignIn = () => {
+    promptAsync();
+  };
+
   return (
     <View style={styles.container}>
       {userInfo ? (
         <View>
             <Image source={{ uri: userInfo.picture }} style={styles.profilePic} />
-          <Text>Name: {userInfo.name}!</Text>
-          <Text>Email: {userInfo.email}</Text>
+          <Text>{strings.name} {userInfo.name}!</Text>
+          <Text>{strings.email} {userInfo.email}</Text>
         </View>
       ) : (
         <Button
-          title="Sign in with Google"
-          onPress={() => {
-            promptAsync({
-              showInRecents: true,
-            });
-          }}
+          title={strings.signin_google}
+          onPress={doSignIn}
         />
       )}
     </View>
