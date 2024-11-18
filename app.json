@@ -1,14 +1,17 @@
 {
   "expo": {
     "name": "GoogleSignIn",
-    "scheme": "@abhi",
+    "scheme": "googleSignIn",
     "slug": "GoogleSignIn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -20,7 +23,11 @@
       "infoPlist": {
         "CFBundleURLTypes": [
           {
-            "CFBundleURLSchemes": ["com.googleusercontent.apps.74629819012-rkiav4q4uv36kerqr43bljf39sk6l96g", "abhi230", "@abhi230"]
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.74629819012-rkiav4q4uv36kerqr43bljf39sk6l96g",
+              "abhi230",
+              "@abhi230"
+            ]
           }
         ]
       }
@@ -30,18 +37,15 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.abhi.googleSignIn",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.abhi.googleSignIn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "googleClientId": {
-        "android": "74629819012-7pirurm080u9mb9r9mfak69l0cjvge7m.apps.googleusercontent.com",
-        "ios": "74629819012-rkiav4q4uv36kerqr43bljf39sk6l96g.apps.googleusercontent.com"
-      },
-      "googleWebClientId": "74629819012-g2h1hmo2gdulnschu2e36ot4ha95b5lh.apps.googleusercontent.com"
+      "eas": {
+        "projectId": "60cdf568-44fe-4201-9b16-c1f2eba998ee"
+      }
     }
   }
 }

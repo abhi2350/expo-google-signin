@@ -24,7 +24,7 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="@abhi"/>
+        <data android:scheme="googleSignIn"/>
         <data android:scheme="com.abhi.googleSignIn"/>
       </intent-filter>
     </activity>

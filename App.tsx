@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Image, StyleSheet, Text, View } from "react-native";
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from "expo-web-browser";
-import { constants, strings } from "./constants";
+import { strings } from "./constants";
 
 interface UserInfo {
   name: string;
@@ -10,16 +10,18 @@ interface UserInfo {
   picture: string;
 }
 
+const iOS_REQUEST = {
+  iosClientId: "74629819012-rkiav4q4uv36kerqr43bljf39sk6l96g.apps.googleusercontent.com",
+  clientId: "74629819012-g2h1hmo2gdulnschu2e36ot4ha95b5lh.apps.googleusercontent.com",
+  androidClientId: "74629819012-7pirurm080u9mb9r9mfak69l0cjvge7m.apps.googleusercontent.com",
+}
+
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
 
-const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-  iosClientId: constants.ios_client_id,
-  clientId: constants.client_id,
-  androidClientId: constants.android_client_id,
-});
+const [request, response, promptAsync] = Google.useIdTokenAuthRequest(iOS_REQUEST);
 
   useEffect(() => {
     const fetchUserInfo = async (token: string) => {
@@ -40,7 +42,9 @@ const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
   }, [response]);
 
   const doSignIn = () => {
-    promptAsync();
+    promptAsync({
+      showInRecents: true,
+    });
   };
 
   return (
